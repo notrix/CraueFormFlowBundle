@@ -362,7 +362,7 @@ class FormFlow {
 		return $requestedStep;
 	}
 
-	public function bind($formData) {
+	public function bind($formData, array $options = array()) {
 		if (!$this->allowDynamicStepNavigation && $this->request->isMethod('GET')) {
 			$this->reset();
 			return;
@@ -387,7 +387,7 @@ class FormFlow {
 		}
 
 		$this->currentStep = $requestedStep;
-		$this->applyDataFromSavedSteps($formData);
+		$this->applyDataFromSavedSteps($formData, $options);
 		if (!$this->allowDynamicStepNavigation && $this->getRequestedTransition() === self::TRANSITION_BACK) {
 			/*
 			 * Don't invalidate data for the current step to properly show the filled out form for that step after
